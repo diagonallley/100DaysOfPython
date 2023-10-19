@@ -2,8 +2,9 @@ import datetime
 import smtplib
 import pandas as pd
 from random import randint, choice
-user = "pythont481@gmail.com"
-pwd = "kifq facl nzjw tmqj"
+import os
+user = os.environ.get("GMAIL_USER")
+pwd = os.environ.get("GMAIL_PWD")
 
 
 list_of_letters = []

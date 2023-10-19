@@ -19,6 +19,7 @@ if date == None or date == "":
     date = "2010-10-20"
 
 play_list_uri = ""
+playlist__="hot-100"
 URL = "https://www.billboard.com/charts/hot-100/"
 
 
