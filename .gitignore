@@ -1,0 +1,17 @@
+# Ignore a specific file
+filename.ext
+
+# Ignore all files with a certain extension
+*.pdf
+*.cache
+*.zip
+*.rar
+*.env
+# Ignore a directory and all its contents
+/dirname/
+
+# Ignore files matching a pattern in any directory
+**/pattern
+
+# Ignore files in a specific directory
+/dirname/*.ext

@@ -71,4 +71,4 @@ weather_data = get_hourly_weather()
 # print(weather_data)
 will_it_rain(weather_data)
 
-send_message()
+# send_message()
