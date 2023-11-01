@@ -61,7 +61,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return render_template("secrets.html", name=request.form.get("name"))
+        return render_template(url_for("secrets"), name=request.form.get("name"))
     return render_template("register.html", logged_in=current_user.is_authenticated)
 
 
