@@ -91,7 +91,7 @@ def login():
 @app.route('/secrets')
 @login_required
 def secrets():
-    # print(current_user.name)
+
     return render_template("secrets.html", logged_in=True)
 
 
