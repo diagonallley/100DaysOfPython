@@ -9,6 +9,7 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+import os
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 
@@ -28,7 +29,7 @@ This will install the packages from the requirements.txt for this project.
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -53,7 +54,8 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    "ALCHEMY_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -127,7 +129,8 @@ def register():
     if form.validate_on_submit():
 
         # Check if user email is already present in the database.
-        result = db.session.execute(db.select(User).where(User.email == form.email.data))
+        result = db.session.execute(
+            db.select(User).where(User.email == form.email.data))
         user = result.scalar()
         if user:
             # User already exists
@@ -157,7 +160,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         password = form.password.data
-        result = db.session.execute(db.select(User).where(User.email == form.email.data))
+        result = db.session.execute(
+            db.select(User).where(User.email == form.email.data))
         # Note, email in db is unique so will only have one result.
         user = result.scalar()
         # Email doesn't exist
@@ -271,12 +275,8 @@ def about():
 def contact():
     return render_template("contact.html", current_user=current_user)
 
-# Optional: You can inclue the email sending code from Day 60:
-# DON'T put your email and password here directly! The code will be visible when you upload to Github.
-# Use environment variables instead (Day 35)
-
-# MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
-# MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
+MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
+MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
 
 # @app.route("/contact", methods=["GET", "POST"])
 # def contact():
@@ -296,4 +296,7 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=False, port=5001)
+
+ufos=""
+ufos.month.value_counts().sort_index().rename(1:"Jan",2:"Feb",3:"March",4:"April",5:"May",6:"June",7:"July",8:"August",9:"Sept",10:"Oct",11:"Nov",12:"Dec")
